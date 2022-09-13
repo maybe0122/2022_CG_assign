@@ -18,9 +18,9 @@ int main()
 	bool capital_flag = false;
 	bool char_flag = false;
 
-	scanf("%s", fname);
 	printf("input data file name: ");
-
+	scanf("%s", fname);
+	
 	if ((fp = fopen(fname, "r")) == NULL)
 	{
 		printf("Wrong file name!\n");
