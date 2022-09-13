@@ -19,7 +19,7 @@ int main()
 	bool char_flag = false;
 
 	scanf("%s", fname);
-	printf("input data file name: %s", fname);
+	printf("input data file name: ");
 
 	if ((fp = fopen(fname, "r")) == NULL)
 	{
