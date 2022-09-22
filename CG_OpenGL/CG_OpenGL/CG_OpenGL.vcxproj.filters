@@ -18,5 +18,8 @@
     <ClCompile Include="OpenGl01.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="OpenGl02.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
