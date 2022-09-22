@@ -1,4 +1,7 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <stdbool.h>
 #include <gl/glew.h> //--- 필요한 헤더파일 include
 #include <gl/freeglut.h>
 #include <gl/freeglut_ext.h>
@@ -6,6 +9,9 @@
 GLvoid drawScene(unsigned char key);
 GLvoid Reshape(int w, int h);
 GLvoid Keyboard(unsigned char key, int x, int y);
+void TimerFunction(int value);
+
+bool flag = true;
 
 void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정 
 { //--- 윈도우 생성하기
@@ -30,10 +36,36 @@ void main(int argc, char** argv) //--- 윈도우 출력하고 콜백함수 설정
 
 GLvoid drawScene(unsigned char key) //--- 콜백 함수: 그리기 콜백 함수 
 { 
-
-	glClearColor( 0.0f, 0.0f, 1.0f, 1.0f ); // 바탕색을 ‘blue’ 로 지정
-	glClear(GL_COLOR_BUFFER_BIT); // 설정된 색으로 전체를 칠하기
-	// 그리기 부분 구현: 그리기 관련 부분이 여기에 포함된다.
+	srand((unsigned int)time(NULL));
+	float r, g, b, al;
+	r = (float)rand() / (float)RAND_MAX;
+	g = (float)rand() / (float)RAND_MAX;
+	b = (float)rand() / (float)RAND_MAX;
+	al = (float)rand() / (float)RAND_MAX;
+	switch (key)
+	{
+	case 'r':
+		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+		break;
+	case 'g':
+		glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+		break;
+	case 'b':
+		glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+		break;
+	case 'a':
+		glClearColor(r, g, b, al);
+		break;
+	case 'w':
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+		break;
+	case 'k':
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		break;
+	default:
+		break;
+	}
+	glClear(GL_COLOR_BUFFER_BIT);
 	glutSwapBuffers(); // 화면에 출력하기
 }
 GLvoid Reshape(int w, int h) //--- 콜백 함수: 다시 그리기 콜백 함수 
@@ -47,46 +79,56 @@ GLvoid Keyboard(unsigned char key, int x, int y)
 	{
 	case 'R':
 	case 'r':
-		glutDisplayFunc(drawScene('r'));
-		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT); 
-		glutSwapBuffers();
+		drawScene('r');
 		break;
 	case 'G':
 	case 'g':
-		glutDisplayFunc(Keyboard);
-		glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glutSwapBuffers();
+		drawScene('g');
 		break;
 	case 'B':
 	case 'b':
-		glutDisplayFunc(Keyboard);
-		glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glutSwapBuffers();
+		drawScene('b');
 		break;
 	case 'A': // random
 	case 'a':
+		drawScene('a');
 		break;
 	case 'W': // white
 	case 'w':
+		drawScene('w');
 		break;
 	case 'K': // black
 	case 'k':
+		drawScene('k');
 		break;
 	case 'T': // set timer & random color
 	case 't':
+		glutTimerFunc(100, TimerFunction, 1);
 		break;
 	case 'S': // end timer
-	case's':
+	case 's':
+		flag = false;
 		break;
 	case 'Q':
 	case 'q':
-		
+		exit(1);
 		break;
 	default:
 		break;
 	}
 	glutPostRedisplay();
+}
+
+void TimerFunction(int value)
+{
+	if (!flag)
+	{
+		glutPostRedisplay();
+		flag = true;
+	}
+	else {
+		drawScene('a');
+		glutPostRedisplay();
+		glutTimerFunc(100, TimerFunction, 1);
+	}
 }
