@@ -1,4 +1,4 @@
-//#define _CRT_SECURE_NO_WARNINGS
+ï»¿//#define _CRT_SECURE_NO_WARNINGS
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <stdbool.h>
@@ -9,9 +9,16 @@
 //void print_map();
 //void init_map();
 //
-//int map[10][10] = {0, };
+//#define SWAP(a, b, type) do { \
+//    type temp; \
+//    temp = a;  \
+//    a = b;     \
+//    b = temp;  \
+//} while (0)
 //
-//int main() //¹Ì¿Ï ¤Ð¤Ð
+//int map[30][30] = {0, };
+//
+//int main() //
 //{
 //	roadmap();
 //	while (1)
@@ -29,10 +36,24 @@
 //			roadmap();
 //			break;
 //		case'r':				//right
+//			for (int i = 0; i < 30; i++)
+//			{
+//				for (int j = 0; j < 29; j++)
+//				{
+//					SWAP(map[i][j], map[i][j+1], int);
+//				}
+//			}
 //			break;
 //		case'l':
+//			for (int i = 0; i < 30; i++)
+//			{
+//				for (int j = 29; j > 0; j--)
+//				{
+//					SWAP(map[i][j], map[i][j - 1], int);
+//				}
+//			}
 //			break;
-//		case'q':				//left
+//		case'q':				
 //			return 0;
 //			break;
 //		default:
@@ -51,7 +72,7 @@
 //	bool flag1 = false, flag2 = false, flag3 = false, flag4 = false, d_flag = false;
 //	while (1)
 //	{
-//		if (map[9][9] == count && flag1 && flag2 && flag3 && flag4) break;
+//		if (map[29][29] == count && flag1 && flag2 && flag3 && flag4) break;
 //		srand((unsigned int)time(NULL));
 //		if (d_count == 0)					//dirction
 //		{
@@ -92,32 +113,36 @@
 //				flag1 = true;
 //			}
 //			else {
+//				d_count = 0;
 //				continue;
 //			}
 //				
 //		}
 //		else if (rand1 == 2)		//down
 //		{
-//			if (y < 9)
+//			if (y < 29)
 //			{
 //				while (1)
 //				{
 //					rand2 = rand() % 7 + 1;
-//					if (y + rand2 > 10)
+//					if (y + rand2 > 30)
 //						continue;
 //					else
 //						break;
 //				}
 //				for (int i = 1; i <= rand2; i++)
 //				{
-//					map[x][y + i] = count;
+//					map[x][y + i - 1] = count;
 //					count++;
 //				}
 //				y += rand2;
 //				flag2 = true;
 //			}
 //			else
+//			{
+//				d_count = 0;
 //				continue;
+//			}
 //		}
 //		else if (rand1 == 3)				//left
 //		{
@@ -133,37 +158,43 @@
 //				}
 //				for (int i = 1; i <= rand2; i++)
 //				{
-//					map[x - i][y] = count;
+//					map[x - i + 1][y] = count;
 //					count++;
 //				}
 //				x -= rand2;
 //				flag3 = true;
 //			}
 //			else
+//			{
 //				continue;
+//				d_count = 0;
+//			}
 //		}
 //		else if (rand1 == 4)								//right
 //		{
-//			if (x < 9)
+//			if (x < 29)
 //			{
 //				while (1)
 //				{
 //					rand2 = rand() % 7 + 1;
-//					if (x + rand2 > 10)
+//					if (x + rand2 > 30)
 //						continue;
 //					else
 //						break;
 //				}
 //				for (int i = 1; i <= rand2; i++)
 //				{
-//					map[x + i][y] = count;
+//					map[x + i - 1][y] = count;
 //					count++;
 //				}
 //				x += rand2;
 //				flag4 = true;
 //			}
 //			else
+//			{
+//				d_count = 0;
 //				continue;
+//			}
 //		}
 //	}
 //	print_map();
@@ -171,9 +202,9 @@
 //
 //void print_map()
 //{
-//	for (int i = 0; i < 10; i++)
+//	for (int i = 0; i < 30; i++)
 //	{
-//		for (int j = 0; j < 10; j++)
+//		for (int j = 0; j < 30; j++)
 //			printf("%d\t", map[i][j]);
 //		printf("\n");
 //	}
@@ -181,7 +212,7 @@
 //
 //void init_map()
 //{
-//	for (int i = 0; i < 10; i++)
-//		for (int j = 0; j < 10; j++)
+//	for (int i = 0; i < 30; i++)
+//		for (int j = 0; j < 30; j++)
 //			map[i][j] = 0;
 //}

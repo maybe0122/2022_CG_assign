@@ -156,6 +156,7 @@
 //		}
 //		printf("\n");
 //	}
+//	textcolor(15);
 //}
 //
 //void rand_bottom()
@@ -236,12 +237,9 @@
 //		b2[col2 - 1][num2] = b1[col2 - 1][num2];
 //		print_board(top_temp);
 //
-//		if (b2[col - 1][num] != '*')
-//			top_temp[col2 - 1][num2] = '*';
-//		else if (b2[col2 - 1][num2] != '*')
-//			top_temp[col - 1][num] = '*';
-//		else
-//			init_top();
+//		b2[col - 1][num] = '*';
+//		b2[col2 - 1][num2] = '*';
+//
 //	}
 //	
 //}

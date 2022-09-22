@@ -45,7 +45,7 @@
 //			if (isspace(buffer[i]))
 //				word_flag = false;
 //
-//			if (!isspace(buffer[i]))									//number count
+//			if (!isspace(buffer[i]) || buffer[i] == '\0')									//number count
 //			{
 //				if (isdigit(buffer[i]))
 //					num_flag = true;

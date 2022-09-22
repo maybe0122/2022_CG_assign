@@ -1,4 +1,4 @@
-//#define _CRT_SECURE_NO_WARNINGS
+ï»¿//#define _CRT_SECURE_NO_WARNINGS
 //#include <stdio.h>
 //#include <stdlib.h>
 //#include <stdbool.h>
@@ -241,12 +241,12 @@
 //	}
 //
 //
-//	if (*sflag == 1)	//Á¤·Ä
+//	if (*sflag == 1)	//
 //	{
 //		print_list(save);
 //		*sflag = 0;
 //	}
-//	else		//¿øº»
+//	else		//
 //	{
 //		print_list(list);
 //		*sflag = 1;
